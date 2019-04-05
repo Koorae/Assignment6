@@ -1,0 +1,184 @@
+Problem 1.
+Worst-case complexity:
+
+Operations to count:
+Not in loop:
+- int i = 0, 1
+- return false, 1
+Loop:
+- i < dubs.length, 2
+- i++, 1
+- Math.abs(dubs[i] - d) < eps, 4
+
+The input of the model is:
+Length of the array, n
+
+The worst case scenario in this context is that the array is looked through
+all the way, which means the condition is not fulfilled till the last
+element or never fulfilled.
+
+Model:
+T(n) = 7n + 2
+O(n) = n
+
+Big-O:
+7n + 2 < 9n
+when x_0 = 1
+
+Thus, c = 9, x_0 = 1
+
+Problem 2.
+
+Operations to count (assuming input y = multiple of 2):
+- y == 0, 1
+- y % 2 == 0, 2
+- int temp = fastModExp(x, (y / 2), m), 1 + T(n/2)
+- (temp * temp) % m, 2
+
+The input of the model are:
+int y, the exponent of the calculations
+
+Recurrence Relation:
+Basecase:
+T(0) = 2
+T(1) = 3 + 3 + T(0) = 8
+
+k = 1
+T(n) = 6 + T(n/2)
+
+k = 2
+T(n) = 6 + 6 + T(n/4)
+
+k = 3
+T(n) = 6 + 6 + 6 + T(n/8)
+
+T(n) = 6k + T(n/2^k)
+
+When T(1), n = 2^k.
+Therefore, k = log2n.
+
+model:
+T(n) = 6(log2n) + 8
+O(n) = logn
+
+Big-O:
+6(log2 n) + 8 < 25(log n)
+when x_0 > 38
+
+Therefore, c = 25, x_0 = 38
+
+Problem 3.
+
+Operations to count:
+- arr == null, 1
+- IntPair[] allP = new, 2
+- arr.length * arr.length, 3
+- int pos = 0, 1
+- int i = 0, 1
+- return, 1
+
+First loop:
+- i < arr.length, 2
+- i ++, 1
+- int j = 0, 1
+
+Second loop:
+- allP[pos] = new IntPair(i, j), 3
+- pos++, 1
+
+The input of the model:
+The length of the array
+
+Models:
+T(n) = 4(n ^ 2) + 4n + 9
+O(n)= n ^ 2
+
+Big-O:
+4(n ^ 2), 4n + 9 < 5 (n ^ 2)
+when x_0 > 6
+
+Thus, c = 5, x_0 = 6
+
+Problem 4.
+
+Informally assume array size is 3
+
+Operations to count:
+- arr = 1, 1
+- String str = "", 1
+- int i = 0, 1
+In first loop (run 3 times):
+- i < arr.length, 2
+- i++, 1
+- int j = 0, 1
+Second loop:
+- j < arr.length, 2
+- j++, 1
+- str = str + arr[i], 3
+
+Input of the models:
+The reps
+
+Models:
+n: The reps
+T(n) = 18n + 15
+O(n) = n
+
+Big-O:
+18n + 15 < 20n 
+when n > 8 
+
+Thus, c = 20, x_0 = 8
+
+This bound is correct because 18n + 15 is linear, and 20n is
+linear. Therefore, when 20n is greater than 18n + 15 at x_0 = 8, it will
+always dominate from that point. 
+
+The new runtime will now be again influenced by the length of the input
+strings in the string array. Therefore, the runtime will have to consider
+putting length of strings into consideration.
+
+Problem 5.
+
+Informally assume two arrays have equal length.
+
+Operation to count:
+- int len1 = arr1.length, 2
+- int len2 = arr2.length, 2
+- int[] arr3 = new int[(len1 + len2)], 2
+- int pos = 0, 1
+- return, 1
+- len1 > len2, 1
+- int i = 0, 1
+In Loop:
+- i < Math.min(len1, len2), 1
+- i++, 1
+- arr3[pos] = arr1[i], 3
+- pos++, 1
+- arr3[pos] = arr2[i], 3
+- pos++, 1
+
+Inputs:
+The length of the arrays
+
+Models:
+T(n) = 10n + 10
+T(n) = n
+
+Big-O:
+10n + 10 < 11n
+when x_0 > 10
+
+Thus, c = 11, x_0 = 10
+
+Space Complexity:
+Since the length of the array is the only variable dependent on the length
+of the two arrays. The space complexity is O(n1 + n2).
+
+From what I percept, space and time complexity are independent from each
+other, depending on how the program is designed. However, it is true that
+space complexity is the lower bound of the time complexity because in order
+for there to be an item to be accessed, there must be spaces allocated for
+that item. Therefore, the least time consuming method will only allocate
+space and not do anything with it. In this situation, time complexity is
+equal to space complexity, the lower bound. 
